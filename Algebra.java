@@ -3,9 +3,12 @@
 // Math.sqrt. All the functions in this class operate on int values and
 // return int values.
 
+
+
 public class Algebra {
 	public static void main(String args[]) {
 	    // Tests some of the operations
+		System.out.println(times(-3,-4));
 	    System.out.println(plus(2,3));   // 2 + 3
 	    System.out.println(minus(7,2));  // 7 - 2
    		System.out.println(minus(2,7));  // 2 - 7
@@ -26,19 +29,22 @@ public class Algebra {
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
 		while (x2 != 0){
-			x1 ++;
-			x2 --;
+			if (x2 > 0) {
+				x1 ++;
+				x2 --;
+			}
+
+			else {
+				x1 --;
+				x2 ++;
+			}
 		}
 		return x1;
 	}
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		while (x2 != 0){
-			x1 --;
-			x2 --; 
-		}
-		return x1;
+		return plus (x1, -x2);
 	}
 
 	// Returns x1 * x2
@@ -46,10 +52,26 @@ public class Algebra {
 		if (x1 == 0 || x2 == 0){
 			return 0;
 		}
+
+		boolean isNegative = false; 
+		if (x1 < 0) {
+			x1 = -x1;
+			isNegative = !isNegative;
+		}
+		if (x2 < 0) {
+			x2 = -x2;
+			isNegative = !isNegative;
+		}
+
 		int result = 0 ;
         for (int i = 0; i < x2; i++){
 			result = plus(result, x1);
 		}
+
+		if (isNegative) {
+			result = -result;
+		}
+
 		return result;
 	}
 
@@ -70,11 +92,27 @@ public class Algebra {
         if (x1 == 0){
 			return 0;
 		}
+
+		boolean isNegative = false; 
+		if (x1 < 0) {
+			x1 = -x1;
+			isNegative = !isNegative;
+		}
+		if (x2 < 0) {
+			x2 = -x2;
+			isNegative = !isNegative;
+		}
+
 		int result = x1 ;
 		int count = 0; 
+
         while (result >= x2){
 			result = minus(result, x2);
 			count ++;
+		}
+
+		if (isNegative) {
+			count = -count;
 		}
 		return count;
 	}
@@ -84,11 +122,27 @@ public class Algebra {
 		if (x1 == 0){
 			return 0;
 		}
+
+		boolean isNegative = false; 
+		if (x1 < 0) {
+			x1 = -x1;
+			isNegative = !isNegative;
+		}
+		if (x2 < 0) {
+			x2 = -x2;
+			isNegative = !isNegative;
+		}
+
 		int result = x1 ;
-		int count = 0; 
-        while (result >= x2){
+
+		while (result >= x2){
 			result = minus(result, x2);
 		}
+
+		if (isNegative){
+			result = minus(x2, result);
+		}
+
 		return result;
 	}	
 
@@ -99,11 +153,10 @@ public class Algebra {
 		}
 		int numToMultiply = 1;
 		int result = 0; 
-		while (result < x){
-			result = pow(numToMultiply, 2);
-			numToMultiply ++;
-			// System.out.println("numToMultiply :   "+numToMultiply);
+		while (times(numToMultiply, numToMultiply) <= x){
+			result = numToMultiply;
+			numToMultiply = plus(numToMultiply, 1);
 		}
-		return numToMultiply - 1;
+		return result;
 	}	  	   
 }
