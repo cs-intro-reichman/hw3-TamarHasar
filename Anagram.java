@@ -85,14 +85,20 @@ public class Anagram {
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
 		String anagram = "";
-    int length = str.length(); 
-
-		for (int i = 0; i < length; i++) {
+    	while (str.length() > 0) {
 			int randomIndex = (int) (Math.random() * str.length());
-			anagram += str.charAt(randomIndex); // Append the character at the random index
-			str = str.substring(0, randomIndex) + str.substring(randomIndex + 1); // Remove the character
+	
+			anagram += str.charAt(randomIndex);
+	
+			if (randomIndex == 0) {
+				str = str.substring(1); 
+			} else if (randomIndex == str.length() - 1) {
+				str = str.substring(0, randomIndex); 
+			} else {
+				str = str.substring(0, randomIndex) + str.substring(randomIndex + 1); // Remove character in the middle
+			}
 		}
-
+	
 		return anagram;
 	}
 }
