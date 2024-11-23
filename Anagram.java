@@ -50,7 +50,6 @@ public class Anagram {
 				if (str1.charAt(i) == str2.charAt(j)) {
 					isSameChar = true;
 
-					str2 = str2.substring(0, j) + str2.substring(j + 1);
 					str1 = str1.substring(0, i) + str1.substring(i + 1);
 				}
 			}
