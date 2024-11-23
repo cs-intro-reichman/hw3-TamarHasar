@@ -85,7 +85,7 @@ public class Anagram {
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
 		String anagram = "";
-    	int length = str.length(); 
+    int length = str.length(); 
 
 		for (int i = 0; i < length; i++) {
 			int randomIndex = (int) (Math.random() * str.length());
